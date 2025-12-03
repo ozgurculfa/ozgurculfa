@@ -129,3 +129,59 @@ Numbered circles inside cards.card-custom ul {
   font-size: 0.9rem;
   font-weight: bold;
 }
+/* Make main containers responsive */
+main.container {
+  padding: 40px 15px; /* mobile default */
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Card adjustments for mobile */
+.card-custom, .proj, .fade-card {
+  padding: 20px;
+  margin: 15px 0;
+  box-sizing: border-box;
+}
+
+/* Numbered list adjustments for mobile */
+.card-custom ul li {
+  padding-left: 35px;
+}
+
+/* Fade-in animation delay (optional) */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s forwards;
+}
+
+/* Keyframes for fade-in */
+@keyframes fadeInUp {
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* Tablet / medium screens */
+@media (min-width: 768px) {
+  main.container {
+    padding: 60px 30px;
+  }
+  .card-custom, .proj, .fade-card {
+    padding: 25px;
+    margin: 20px 0;
+  }
+  .card-custom ul li {
+    padding-left: 40px;
+  }
+}
+
+/* Desktop / large screens */
+@media (min-width: 1200px) {
+  main.container {
+    padding: 80px 60px;
+  }
+  .card-custom, .proj, .fade-card {
+    padding: 28px 25px;
+    margin: 25px 0;
+  }
+}
+
