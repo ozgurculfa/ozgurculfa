@@ -129,22 +129,28 @@ body{
   background:linear-gradient(135deg,#0c1f42,#153a6d);
   color:#fff;
 }
-.hero img{
-  max-width:40%;
-  min-width:180px;
-  border-radius:70%;
-  border:4px solid rgba(255,255,255,0.18);
-  margin-bottom:20px;
+.hero img {
+  width: 250px;       /* fixed base size */
+  max-width: 40vw;    /* scales on large screens */
+  height: auto;       /* preserves aspect ratio */
+  border-radius: 50%; /* true circle */
+  border: 4px solid rgba(255,255,255,0.18);
+  margin-bottom: 20px;
 }
-.hero h1{
-  font-weight:600;
-  font-size:clamp(1.8rem,4vw,2.8rem);
-  margin-bottom:10px;
+
+/* Hero text font fallback */
+.hero h1 {
+  font-weight: 600;
+  font-size: 2rem;      /* base font */
+  font-size: clamp(1.8rem, 4vw, 2.8rem); /* keeps scaling */
+  margin-bottom: 10px;
 }
-.hero p.lead{
-  font-size:clamp(1rem,2.5vw,1.2rem);
-  margin-bottom:5px;
+.hero p.lead {
+  font-size: 1rem;       /* fallback for Safari */
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  margin-bottom: 5px;
 }
+
 
 /* MAIN / CARDS */
 main{
