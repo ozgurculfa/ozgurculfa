@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Ozgur Culfa — Projects</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Load DARK MODE *before* CSS -->
+<!-- 
+<script>
+  if (localStorage.getItem("darkMode") === "true") {
+    document.documentElement.classList.add("dark-mode");
+  }
+</script>
+ -->
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+:root{
+  --accent:#153a6d;
+  --card:#ffffff;
+  --bg:#f7f8fa;
+  --text:#222;
+}
+
+.dark-mode {
+  --bg: #0b0c0f;
+  --text: #e7eef8;
+  --card: #0f1114;
+  --accent: #1c3a6d;
+}
+
+body{
+  font-family:Inter, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  margin:0;
+  transition: background-color .3s, color .3s;
+}
+
+.sticky-nav{
+  position:sticky;
+  top:0;
+  z-index:999;
+  background:var(--card);
+  padding:12px 0;
+  box-shadow:0 2px 10px rgba(0,0,0,0.06);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+}
+
+.nav-link{
+  color:var(--text);
+  text-decoration:none;
+  font-weight:600;
+}
+
+.nav-link.active{
+  border-bottom:2px solid var(--accent);
+}
+
+.card-custom, .proj{
+  border-radius:14px;
+  padding:25px;
+  background:var(--card);
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
+  margin:20px 0;
+  color:var(--text);
+}
+
+footer{
+  padding:18px;
+  text-align:center;
+  background:#0c1f42;
+  color:#fff;
+}
+
+.dark-toggle{
+  cursor:pointer;
+  border-radius:20px;
+  padding:6px 12px;
+  border:none;
+  background:var(--accent);
+  color:#fff;
+  transition: background-color .3s;
+}
+
+.fade-in{
+  opacity:0;
+  transform:translateY(20px);
+  animation:fadeInUp 0.6s forwards;
+}
+
+@keyframes fadeInUp{
+  to { opacity:1; transform:translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<nav class="sticky-nav">
+  <a class="nav-link" href="index.html">Home</a>
+  <a class="nav-link" href="about.html">About</a>
+  <a class="nav-link" href="experience.html">Experience</a>
+  <a class="nav-link" href="skills.html">Skills</a>
+  <a class="nav-link" href="publications.html">Publications</a>
+  <a class="nav-link" href="projects.html">Projects</a>
+  <a class="nav-link" href="contact.html">Contact</a>
+  <button class="dark-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+</nav>
+
+<main class="container" style="padding:40px 20px">
+  <h1 class="fade-in">Projects & Grants</h1>
+
+  <div class="proj fade-in">
+    <h4>LASERNETUS Cycle 7 — PI (2025)</h4>
+    <p>Beam time awarded for study of particle acceleration via short-pulse high-power laser — foam interactions at Advanced Beam Laboratory.</p>
+  </div>
+
+  <div class="proj fade-in">
+    <h4>TUBITAK 3501 — PI (2018–2022)</h4>
+    <p>Investigation of particle generation by ultra-intense helical laser beams.</p>
+  </div>
+
+  <div class="proj fade-in">
+    <h4>TUBITAK 3001 — PI (2017–2019)</h4>
+    <p>Investigations of proton generation by high-power laser–plasma interactions.</p>
+  </div>
+
+  <div class="proj fade-in">
+    <h4>EU Horizon 2020 — ELITRANS (Investigator, 2017)</h4>
+    <p>Collaborative EU project on laser technology and transport systems.</p>
+  </div>
+</main>
+
+<footer>
+  © 2025 Dr. Ozgur Culfa
+</footer>
+
+<!-- 
+<script>
+function toggleDarkMode() {
+  const html = document.documentElement;
+  html.classList.toggle('dark-mode');
+  localStorage.setItem('darkMode', html.classList.contains('dark-mode'));
+  updateToggleButton();
+}
+
+function updateToggleButton() {
+  const btn = document.querySelector('.dark-toggle');
+  if (document.documentElement.classList.contains('dark-mode')) {
+    btn.textContent = 'Light Mode';
+    btn.style.backgroundColor = '#1c3a6d';
+  } else {
+    btn.textContent = 'Dark Mode';
+    btn.style.backgroundColor = '#153a6d';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  updateToggleButton();
+
+  const path = window.location.pathname.split("/").pop();
+  document.querySelectorAll('.nav-link').forEach(link => {
+    if (link.getAttribute('href') === path ||
+       (path === '' && link.getAttribute('href') === 'index.html')) {
+       link.classList.add('active');
+    }
+  });
+
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    el.style.animationDelay = `${i * 0.1}s`;
+  });
+});
+</script>
+ -->
+
+<script src="common.js"></script>
+
+</body>
+</html>
