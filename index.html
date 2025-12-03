@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Ozgur Culfa &mdash; Home</title>
+<meta charset="utf-8" />
+<title>Ozgur Culfa — Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
@@ -31,34 +31,95 @@ body{
   transition: background-color .3s, color .3s;
 }
 
-/* NAVIGATION */
-.sticky-nav{
-  position:sticky;
+/* NAVBAR (keeps centered links visual) */
+.navbar-wrapper{
+  position: sticky;
   top:0;
   z-index:999;
   background:var(--card);
-  padding:12px 0;
   box-shadow:0 2px 10px rgba(0,0,0,0.06);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:14px;
 }
 
-.nav-link{
+/* this inner container centers the nav links like before */
+.sticky-nav{
+  display:flex;
+  align-items:center;
+  justify-content:center; /* keeps links centered */
+  gap:14px;
+  padding:12px 0;
+  position:relative;
+}
+
+/* normal nav links (visible on desktop) */
+.nav-links {
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+.nav-links a {
   color:var(--text);
   text-decoration:none;
   font-weight:600;
   padding:4px 8px;
   transition: color .3s, border-bottom .3s;
 }
+.nav-links a:hover{ color:var(--accent); }
+.nav-links a.active{ border-bottom:3px solid var(--accent); }
 
-.nav-link:hover{
-  color:var(--accent);
+/* Menu button (dropdown trigger) - positioned to the right inside nav wrapper */
+.menu-button {
+  position:absolute;
+  right:18px;
+  top:50%;
+  transform:translateY(-50%);
+  background:transparent;
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+  color:var(--text);
+  padding:6px 10px;
+  border-radius:8px;
 }
+.menu-button:hover{ color:var(--accent); }
 
-.nav-link.active{
-  border-bottom:3px solid var(--accent);
+/* Dropdown panel */
+.dropdown-panel {
+  display:none;
+  position:absolute;
+  right:18px;
+  top:100%;
+  margin-top:8px;
+  background:var(--card);
+  border-radius:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.12);
+  padding:8px 12px;
+  min-width:200px;
+  z-index:1000;
+}
+.dropdown-panel a{
+  display:block;
+  padding:8px 10px;
+  color:var(--text);
+  text-decoration:none;
+  font-weight:600;
+}
+.dropdown-panel a:hover{ background:rgba(0,0,0,0.04); color:var(--accent); border-radius:6px; }
+
+/* show class toggles visibility */
+.dropdown-panel.open{ display:block; }
+
+/* MOBILE: hide the centered links and move Menu to left */
+@media (max-width:768px){
+  .nav-links{ display:none; }
+  .menu-button{
+    right:unset;
+    left:12px;
+  }
+  .dropdown-panel{
+    left:12px;
+    right:12px;
+    min-width:unset;
+  }
 }
 
 /* HERO */
@@ -68,43 +129,24 @@ body{
   background:linear-gradient(135deg,#0c1f42,#153a6d);
   color:#fff;
 }
-
-
-.hero img {
-  max-width: 500px;
-  width: auto;
-  height: auto;
-  border-radius: 70%;
-  border: 4px solid rgba(255,255,255,0.18);
-  margin-bottom: 20px;
+.hero img{
+  max-width:40%;
+  min-width:180px;
+  border-radius:70%;
+  border:4px solid rgba(255,255,255,0.18);
+  margin-bottom:20px;
+}
+.hero h1{
+  font-weight:600;
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  margin-bottom:10px;
+}
+.hero p.lead{
+  font-size:clamp(1rem,2.5vw,1.2rem);
+  margin-bottom:5px;
 }
 
-.hero h1 {
-  font-weight: 600;
-  font-size: clamp(1.8rem, 4vw, 2.8rem); /* responsive size */
-  margin-bottom: 10px;
-}
-
-.hero p.lead {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-  margin-bottom: 5px;
-}
-
-
-/* BUTTONS */
-.btn-accent{
-  background:var(--accent);
-  color:#fff;
-  border-radius:30px;
-  padding:8px 20px;
-  border:none;
-  transition: background .3s;
-}
-.btn-accent:hover{
-  background:#1c3a6d;
-}
-
-/* MAIN CONTENT */
+/* MAIN / CARDS */
 main{
   padding:60px 20px;
 }
@@ -114,11 +156,6 @@ main{
   background:var(--card);
   box-shadow:0 8px 20px rgba(0,0,0,0.08);
   margin:25px 0;
-  transition: transform .3s, box-shadow .3s;
-}
-.card-custom:hover{
-  transform:translateY(-5px);
-  box-shadow:0 12px 28px rgba(0,0,0,0.15);
 }
 
 /* FOOTER */
@@ -130,8 +167,8 @@ footer{
   font-weight:500;
 }
 
-/* DARK MODE OVERRIDES */
-.dark-mode body{
+/* DARK MODE */
+.dark-mode body, .dark-mode{
   background:var(--bg);
   color:var(--text);
 }
@@ -140,45 +177,48 @@ footer{
   box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }
 
-/* DARK MODE TOGGLE */
-.dark-toggle{
-  cursor:pointer;
-  border-radius:20px;
-  padding:6px 12px;
-  border:none;
-  background:var(--accent);
-  color:#fff;
-  transition: background-color .3s;
-}
-
-/* FADE-IN ANIMATION */
-.fade-in{
-  opacity:0;
-  transform:translateY(20px);
-  animation:fadeInUp 0.6s forwards;
-}
-@keyframes fadeInUp{
-  to { opacity:1; transform:translateY(0); }
-}
-
-@media(max-width:768px){
-  .hero{padding:80px 14px}
-  .hero h1{font-size:2rem}
-}
+/* small fade */
+.fade-in{ opacity:0; transform:translateY(12px); animation:fadeInUp .5s forwards; }
+@keyframes fadeInUp{ to{ opacity:1; transform:none; } }
 </style>
 </head>
 <body>
 
-<nav class="sticky-nav">
-  <a class="nav-link" href="index.html">Home</a>
-  <a class="nav-link" href="about.html">About</a>
-  <a class="nav-link" href="experience.html">Experience</a>
-  <a class="nav-link" href="skills.html">Skills</a>
-  <a class="nav-link" href="publications.html">Publications</a>
-  <a class="nav-link" href="projects.html">Projects</a>
-  <a class="nav-link" href="contact.html">Contact</a>
-  <button class="dark-toggle" onclick="toggleDarkMode()">Dark Mode</button>
-</nav>
+<!-- NAVBAR WRAPPER -->
+<div class="navbar-wrapper">
+  <div class="sticky-nav">
+
+    <!-- Centered links (desktop) - identical look to your original centered nav -->
+    <nav class="nav-links" aria-label="Primary">
+      <a class="nav-link active" href="index.html">Home</a>
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="experience.html">Experience</a>
+      <a class="nav-link" href="skills.html">Skills</a>
+      <a class="nav-link" href="publications.html">Publications</a>
+      <a class="nav-link" href="projects.html">Projects</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </nav>
+
+    <!-- Menu button (always visible) - toggles the dropdown panel -->
+    <button class="menu-button" id="menuBtn" aria-expanded="false" aria-controls="dropdownPanel" onclick="toggleDropdown()">
+      Menu ▾
+    </button>
+
+    <!-- Dropdown panel (hidden by default) -->
+    <div id="dropdownPanel" class="dropdown-panel" role="menu" aria-hidden="true">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="experience.html">Experience</a>
+      <a href="skills.html">Skills</a>
+      <a href="publications.html">Publications</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <hr style="border:none;border-top:1px solid rgba(0,0,0,0.06);margin:8px 0;">
+      <button class="dark-toggle" onclick="toggleDarkMode()" style="width:100%;">Dark Mode</button>
+    </div>
+
+  </div>
+</div>
 
 <header class="hero fade-in">
   <img src="img/profile.jpg" alt="Ozgur Culfa" />
@@ -186,7 +226,7 @@ footer{
   <p class="lead">Experimental Plasma Physicist • Laser–Plasma Interactions • ICF & HED Physics</p>
   <p>Center for Energy Research, University of California San Diego</p>
   <div style="margin-top:20px">
-    <a class="btn-accent" href="about.html">View CV & Research</a>
+    <a class="btn btn-light" href="about.html">View CV & Research</a>
     <a class="btn btn-outline-light" href="contact.html" style="margin-left:10px">Contact</a>
   </div>
 </header>
@@ -208,6 +248,7 @@ footer{
         </ul>
       </div>
     </div>
+
     <div class="col-md-6 fade-in">
       <div class="card-custom">
         <h3>Recent Grants & Awards</h3>
@@ -225,6 +266,48 @@ footer{
   © 2025 Dr. Ozgur Culfa — Center for Energy Research, UCSD
 </footer>
 
-<script src="common.js"></script>
+<script>
+/* Toggle dropdown panel (Menu ▾) */
+function toggleDropdown(){
+  const panel = document.getElementById('dropdownPanel');
+  const btn = document.getElementById('menuBtn');
+  const open = panel.classList.toggle('open');
+  panel.setAttribute('aria-hidden', !open);
+  btn.setAttribute('aria-expanded', open);
+}
+
+/* Close dropdown when clicking outside */
+document.addEventListener('click', function(e){
+  const panel = document.getElementById('dropdownPanel');
+  const btn = document.getElementById('menuBtn');
+  if (!panel.contains(e.target) && !btn.contains(e.target)) {
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden', 'true');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+});
+
+/* Dark mode toggling (uses class on <html> for global variables) */
+function toggleDarkMode(){
+  const html = document.documentElement;
+  html.classList.toggle('dark-mode');
+  // persist preference
+  if (html.classList.contains('dark-mode')) localStorage.setItem('site-dark','1');
+  else localStorage.removeItem('site-dark');
+}
+
+/* restore preference on load */
+document.addEventListener('DOMContentLoaded', function(){
+  if (localStorage.getItem('site-dark') === '1') {
+    document.documentElement.classList.add('dark-mode');
+  }
+
+  // small fade-in sequencing
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    el.style.animationDelay = (i * 0.08) + 's';
+  });
+});
+</script>
+
 </body>
 </html>
