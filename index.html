@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Ozgur Culfa — Home</title>
+<title>Ozgur Culfa &mdash; Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
@@ -52,36 +52,44 @@ body{
   padding:4px 8px;
   transition: color .3s, border-bottom .3s;
 }
-.nav-link:hover{ color:var(--accent); }
-.nav-link.active{ border-bottom:3px solid var(--accent); }
+
+.nav-link:hover{
+  color:var(--accent);
+}
+
+.nav-link.active{
+  border-bottom:3px solid var(--accent);
+}
 
 /* HERO */
 .hero{
-  padding:100px 15px;
+  padding:120px 20px;
   text-align:center;
   background:linear-gradient(135deg,#0c1f42,#153a6d);
   color:#fff;
 }
 
-.hero img{
-  width: 80%;
-  max-width:200px;
+
+.hero img {
+  max-width: 500px;
+  width: auto;
   height: auto;
-  border-radius:70%;
+  border-radius: 70%;
   border: 4px solid rgba(255,255,255,0.18);
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
 
-.hero h1{
-  font-weight:600;
-  font-size:clamp(1.8rem, 6vw, 2.8rem);
-  margin-bottom:10px;
+.hero h1 {
+  font-weight: 600;
+  font-size: clamp(1.8rem, 4vw, 2.8rem); /* responsive size */
+  margin-bottom: 10px;
 }
 
-.hero p.lead{
-  font-size:clamp(1rem, 4vw, 1.2rem);
-  margin-bottom:5px;
+.hero p.lead {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  margin-bottom: 5px;
 }
+
 
 /* BUTTONS */
 .btn-accent{
@@ -92,15 +100,14 @@ body{
   border:none;
   transition: background .3s;
 }
-.btn-accent:hover{ background:#1c3a6d; }
-
-/* MAIN CONTENT */
-main.container{
-  padding:40px 15px;
-  max-width:100%;
-  box-sizing:border-box;
+.btn-accent:hover{
+  background:#1c3a6d;
 }
 
+/* MAIN CONTENT */
+main{
+  padding:60px 20px;
+}
 .card-custom{
   border-radius:16px;
   padding:28px 25px;
@@ -124,8 +131,14 @@ footer{
 }
 
 /* DARK MODE OVERRIDES */
-.dark-mode body{ background:var(--bg); color:var(--text); }
-.dark-mode .card-custom{ background:var(--card); box-shadow:0 8px 20px rgba(0,0,0,0.2); }
+.dark-mode body{
+  background:var(--bg);
+  color:var(--text);
+}
+.dark-mode .card-custom{
+  background:var(--card);
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
 
 /* DARK MODE TOGGLE */
 .dark-toggle{
@@ -148,20 +161,16 @@ footer{
   to { opacity:1; transform:translateY(0); }
 }
 
-/* RESPONSIVE MEDIA QUERIES */
-@media(min-width:768px){
-  main.container{ padding:60px 30px; }
-  .card-custom{ padding:28px 25px; margin:25px 0; }
-}
-@media(min-width:1200px){
-  main.container{ padding:80px 60px; }
+@media(max-width:768px){
+  .hero{padding:80px 14px}
+  .hero h1{font-size:2rem}
 }
 </style>
 </head>
 <body>
 
 <nav class="sticky-nav">
-  <a class="nav-link active" href="index.html">Home</a>
+  <a class="nav-link" href="index.html">Home</a>
   <a class="nav-link" href="about.html">About</a>
   <a class="nav-link" href="experience.html">Experience</a>
   <a class="nav-link" href="skills.html">Skills</a>
@@ -219,4 +228,3 @@ footer{
 <script src="common.js"></script>
 </body>
 </html>
-
