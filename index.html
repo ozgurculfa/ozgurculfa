@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
+<meta charset="utf-8">
 <title>Ozgur Culfa — Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -23,103 +23,136 @@
   --accent: #1c3a6d;
 }
 
-body{
-  font-family:Inter, sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  margin:0;
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, sans-serif;
+  background: var(--bg);
+  color: var(--text);
   transition: background-color .3s, color .3s;
 }
 
-/* NAVBAR (keeps centered links visual) */
-.navbar-wrapper{
+/* NAVIGATION */
+.navbar-custom {
+  background: var(--card);
+  padding: 12px 18px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
   position: sticky;
-  top:0;
-  z-index:999;
-  background:var(--card);
-  box-shadow:0 2px 10px rgba(0,0,0,0.06);
+  top: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* this inner container centers the nav links like before */
-.sticky-nav{
-  display:flex;
-  align-items:center;
-  justify-content:center; /* keeps links centered */
-  gap:14px;
-  padding:12px 0;
-  position:relative;
-}
-
-/* normal nav links (visible on desktop) */
 .nav-links {
-  display:flex;
-  gap:14px;
-  align-items:center;
+  display: flex;
+  gap: 16px;
+  align-items: center;
 }
+
 .nav-links a {
-  color:var(--text);
-  text-decoration:none;
-  font-weight:600;
-  padding:4px 8px;
-  transition: color .3s, border-bottom .3s;
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 6px 8px;
+  transition: 0.3s;
 }
-.nav-links a:hover{ color:var(--accent); }
-.nav-links a.active{ border-bottom:3px solid var(--accent); }
 
-/* Menu button (dropdown trigger) - positioned to the right inside nav wrapper */
-.menu-button {
-  position:absolute;
-  right:18px;
-  top:50%;
-  transform:translateY(-50%);
-  background:transparent;
-  border:none;
-  font-weight:600;
-  cursor:pointer;
-  color:var(--text);
-  padding:6px 10px;
-  border-radius:8px;
+.nav-links a:hover {
+  color: var(--accent);
 }
-.menu-button:hover{ color:var(--accent); }
 
-/* Dropdown panel */
-.dropdown-panel {
-  display:none;
-  position:absolute;
-  right:18px;
-  top:100%;
-  margin-top:8px;
-  background:var(--card);
-  border-radius:10px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.12);
-  padding:8px 12px;
-  min-width:200px;
-  z-index:1000;
+.nav-links .active {
+  border-bottom: 3px solid var(--accent);
 }
-.dropdown-panel a{
-  display:block;
-  padding:8px 10px;
-  color:var(--text);
-  text-decoration:none;
-  font-weight:600;
+
+/* Dropdown button */
+.dropdown {
+  position: relative;
 }
-.dropdown-panel a:hover{ background:rgba(0,0,0,0.04); color:var(--accent); border-radius:6px; }
 
-/* show class toggles visibility */
-.dropdown-panel.open{ display:block; }
+.dropdown-toggle {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+}
 
-/* MOBILE: hide the centered links and move Menu to left */
-@media (max-width:768px){
-  .nav-links{ display:none; }
-  .menu-button{
-    right:unset;
-    left:12px;
-  }
-  .dropdown-panel{
-    left:12px;
-    right:12px;
-    min-width:unset;
-  }
+/* Dropdown menu */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: var(--card);
+  flex-direction: column;
+  padding: 10px 0;
+  min-width: 150px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+.dropdown-menu a {
+  color: var(--text);
+  padding: 8px 16px;
+  text-decoration: none;
+  display: block;
+  font-weight: 600;
+}
+
+.dropdown-menu a:hover {
+  color: var(--accent);
+}
+
+.dropdown.open .dropdown-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hamburger for mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.hamburger div {
+  width: 26px;
+  height: 3px;
+  background: var(--text);
+  transition: 0.3s;
+}
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: var(--card);
+  padding: 10px 18px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.mobile-menu a {
+  padding: 10px 0;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.mobile-menu a:hover {
+  color: var(--accent);
+}
+
+.mobile-menu.open {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
 }
 
 /* HERO */
@@ -128,19 +161,20 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 50vh; /* full viewport height */
+  min-height: 100vh;
   width: 100%;
   background: linear-gradient(135deg,#0c1f42,#153a6d);
   color: #fff;
   text-align: center;
-  padding: 0 20px; /* optional horizontal spacing */
+  padding: 0 20px;
   box-sizing: border-box;
 }
 
 .hero img {
-  max-width: 40%;
-  min-width: 220px;
-  border-radius: 70%;
+  width: 200px;
+  max-width: 40vw;
+  height: auto;
+  border-radius: 50%;
   border: 4px solid rgba(255,255,255,0.18);
   margin-bottom: 20px;
 }
@@ -155,20 +189,21 @@ body{
   font-size: clamp(1rem, 2.5vw, 1.2rem);
   margin-bottom: 5px;
 }
-@media (max-width: 768px) {
-  .hero img {
-    width: 100px;
-  }
-  .hero h1 {
-    font-size: 2rem;
-  }
-  .hero p.lead {
-    font-size: 1rem;
-  }
+
+/* BUTTONS */
+.btn-accent{
+  background:var(--accent);
+  color:#fff;
+  border-radius:30px;
+  padding:8px 20px;
+  border:none;
+  transition: background .3s;
+}
+.btn-accent:hover{
+  background:#1c3a6d;
 }
 
-
-/* MAIN / CARDS */
+/* MAIN CONTENT */
 main{
   padding:60px 20px;
 }
@@ -178,6 +213,11 @@ main{
   background:var(--card);
   box-shadow:0 8px 20px rgba(0,0,0,0.08);
   margin:25px 0;
+  transition: transform .3s, box-shadow .3s;
+}
+.card-custom:hover{
+  transform:translateY(-5px);
+  box-shadow:0 12px 28px rgba(0,0,0,0.15);
 }
 
 /* FOOTER */
@@ -189,8 +229,8 @@ footer{
   font-weight:500;
 }
 
-/* DARK MODE */
-.dark-mode body, .dark-mode{
+/* DARK MODE OVERRIDES */
+.dark-mode body{
   background:var(--bg);
   color:var(--text);
 }
@@ -199,60 +239,87 @@ footer{
   box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }
 
-/* small fade */
-.fade-in{ opacity:0; transform:translateY(12px); animation:fadeInUp .5s forwards; }
-@keyframes fadeInUp{ to{ opacity:1; transform:none; } }
+/* DARK MODE TOGGLE */
+.dark-toggle{
+  cursor:pointer;
+  border-radius:20px;
+  padding:6px 12px;
+  border:none;
+  background:var(--accent);
+  color:#fff;
+  transition: background-color .3s;
+}
+
+/* FADE-IN ANIMATION */
+.fade-in{
+  opacity:0;
+  transform:translateY(20px);
+  animation:fadeInUp 0.6s forwards;
+}
+@keyframes fadeInUp{
+  to { opacity:1; transform:translateY(0); }
+}
+
+@media(max-width:768px){
+  .hero img { width: 150px; }
+  .hero h1 { font-size: 2rem; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAVBAR WRAPPER -->
-<div class="navbar-wrapper">
-  <div class="sticky-nav">
+<!-- NAVIGATION -->
+<nav class="navbar-custom">
+  <div class="nav-left">
+    <a href="index.html" class="logo">Dr. Ozgur Culfa</a>
+  </div>
 
-    <!-- Centered links (desktop) - identical look to your original centered nav -->
-    <nav class="nav-links" aria-label="Primary">
-      <a class="nav-link active" href="index.html">Home</a>
-      <a class="nav-link" href="about.html">About</a>
-      <a class="nav-link" href="experience.html">Experience</a>
-      <a class="nav-link" href="skills.html">Skills</a>
-      <a class="nav-link" href="publications.html">Publications</a>
-      <a class="nav-link" href="projects.html">Projects</a>
-      <a class="nav-link" href="contact.html">Contact</a>
-    </nav>
-
-    <!-- Menu button (always visible) - toggles the dropdown panel -->
-    <button class="menu-button" id="menuBtn" aria-expanded="false" aria-controls="dropdownPanel" onclick="toggleDropdown()">
-      Menu ▾
-    </button>
-
-    <!-- Dropdown panel (hidden by default) -->
-    <div id="dropdownPanel" class="dropdown-panel" role="menu" aria-hidden="true">
-      <a href="index.html">Home</a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
       <a href="about.html">About</a>
       <a href="experience.html">Experience</a>
       <a href="skills.html">Skills</a>
       <a href="publications.html">Publications</a>
       <a href="projects.html">Projects</a>
       <a href="contact.html">Contact</a>
-      <hr style="border:none;border-top:1px solid rgba(0,0,0,0.06);margin:8px 0;">
-      <button class="dark-toggle" onclick="toggleDarkMode()" style="width:100%;">Dark Mode</button>
     </div>
 
+    <button class="dark-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+
+    <!-- Hamburger for mobile -->
+    <div class="hamburger" onclick="toggleMobileMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="experience.html">Experience</a>
+  <a href="skills.html">Skills</a>
+  <a href="publications.html">Publications</a>
+  <a href="projects.html">Projects</a>
+  <a href="contact.html">Contact</a>
 </div>
 
+<!-- HERO -->
 <header class="hero fade-in">
   <img src="img/profile.jpg" alt="Ozgur Culfa" />
   <h1>Dr. Ozgur Culfa</h1>
   <p class="lead">Experimental Plasma Physicist • Laser–Plasma Interactions • ICF & HED Physics</p>
   <p>Center for Energy Research, University of California San Diego</p>
   <div style="margin-top:20px">
-    <a class="btn btn-light" href="about.html">View CV & Research</a>
+    <a class="btn-accent" href="about.html">View CV & Research</a>
     <a class="btn btn-outline-light" href="contact.html" style="margin-left:10px">Contact</a>
   </div>
 </header>
 
+<!-- MAIN CONTENT -->
 <main class="container">
   <div class="card-custom fade-in">
     <h2>Quick Overview</h2>
@@ -270,7 +337,6 @@ footer{
         </ul>
       </div>
     </div>
-
     <div class="col-md-6 fade-in">
       <div class="card-custom">
         <h3>Recent Grants & Awards</h3>
@@ -289,47 +355,25 @@ footer{
 </footer>
 
 <script>
-/* Toggle dropdown panel (Menu ▾) */
-function toggleDropdown(){
-  const panel = document.getElementById('dropdownPanel');
-  const btn = document.getElementById('menuBtn');
-  const open = panel.classList.toggle('open');
-  panel.setAttribute('aria-hidden', !open);
-  btn.setAttribute('aria-expanded', open);
+function toggleDarkMode() {
+  document.documentElement.classList.toggle('dark-mode');
 }
 
-/* Close dropdown when clicking outside */
-document.addEventListener('click', function(e){
-  const panel = document.getElementById('dropdownPanel');
-  const btn = document.getElementById('menuBtn');
-  if (!panel.contains(e.target) && !btn.contains(e.target)) {
-    panel.classList.remove('open');
-    panel.setAttribute('aria-hidden', 'true');
-    btn.setAttribute('aria-expanded', 'false');
-  }
-});
-
-/* Dark mode toggling (uses class on <html> for global variables) */
-function toggleDarkMode(){
-  const html = document.documentElement;
-  html.classList.toggle('dark-mode');
-  // persist preference
-  if (html.classList.contains('dark-mode')) localStorage.setItem('site-dark','1');
-  else localStorage.removeItem('site-dark');
+// Mobile menu toggle
+function toggleMobileMenu() {
+  document.getElementById("mobileMenu").classList.toggle("open");
 }
 
-/* restore preference on load */
-document.addEventListener('DOMContentLoaded', function(){
-  if (localStorage.getItem('site-dark') === '1') {
-    document.documentElement.classList.add('dark-mode');
-  }
-
-  // small fade-in sequencing
-  document.querySelectorAll('.fade-in').forEach((el, i) => {
-    el.style.animationDelay = (i * 0.08) + 's';
+// Highlight active page
+document.addEventListener("DOMContentLoaded", function() {
+  const path = window.location.pathname.split("/").pop();
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    if(link.getAttribute('href') === path || (path === '' && link.getAttribute('href') === 'index.html')) {
+      link.classList.add('active');
+    }
   });
 });
 </script>
-
+<script src="common.js"></script>
 </body>
 </html>
