@@ -1,75 +1,60 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  const root = document.documentElement;
-  const toggleBtn = document.getElementById("dark-toggle");
+  // ==============================
+  // THEME TOGGLE (simple version)
+  // ==============================
+  var root = document.documentElement;
+  var toggleBtn = document.getElementById("dark-toggle");
 
-  /* ---------------------------------------------
-     Load saved theme OR fall back to system theme
-  --------------------------------------------- */
-  const saved = localStorage.getItem("theme");
+  var saved = null;
+  try {
+    saved = localStorage.getItem("theme");
+  } catch (e) {
+    saved = null;
+  }
 
   if (saved === "dark") {
     root.classList.add("dark-mode");
   } else if (saved === "light") {
     root.classList.remove("dark-mode");
   } else {
-    const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    root.classList.toggle("dark-mode", systemDark);
+    // Fallback: leave as-is (CSS prefers-color-scheme handles auto)
   }
 
-  /* ---------------------------------------------
-     Respond to OS dark mode changes
-  --------------------------------------------- */
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
-    if (!localStorage.getItem("theme")) {
-      root.classList.toggle("dark-mode", e.matches);
-    }
-  });
-
-  /* ---------------------------------------------
-     Manual Theme Toggle
-  --------------------------------------------- */
   if (toggleBtn) {
     toggleBtn.addEventListener("click", function () {
-      const dark = root.classList.toggle("dark-mode");
-      localStorage.setItem("theme", dark ? "dark" : "light");
+      var isDark = root.classList.toggle("dark-mode");
+      try {
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      } catch (e) {}
     });
   }
 
-  /* ---------------------------------------------------------
-     MOBILE MENU (iPhone Safe)
-  --------------------------------------------------------- */
-  const burger = document.getElementById("menuToggle");
-  const mobileMenu = document.getElementById("mobileMenu");
+  // ==============================
+  // MOBILE MENU (minimal, iPhone-safe)
+  // ==============================
+  var burger = document.getElementById("menuToggle");
+  var mobileMenu = document.getElementById("mobileMenu");
 
-  function toggleMenu(e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    mobileMenu.classList.toggle("open");
-  }
+  if (burger && mobileMenu) {
 
-  if (burger) {
-    burger.addEventListener("click", toggleMenu);
-    burger.addEventListener("touchstart", toggleMenu);
-  }
+    function toggleMenu(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
 
-  function closeMenu(e) {
-    if (
-      mobileMenu &&
-      !mobileMenu.contains(e.target) &&
-      !burger.contains(e.target)
-    ) {
-      mobileMenu.classList.remove("open");
+      if (mobileMenu.classList.contains("open")) {
+        mobileMenu.classList.remove("open");
+      } else {
+        mobileMenu.classList.add("open");
+      }
     }
+
+    // Click for most browsers
+    burger.addEventListener("click", toggleMenu, false);
+    // touchstart for iPhone Safari
+    burger.addEventListener("touchstart", toggleMenu, false);
   }
 
-  document.addEventListener("click", closeMenu);
-  document.addEventListener("touchstart", closeMenu);
-
-  window.addEventListener("resize", function () {
-    if (window.innerWidth > 768 && mobileMenu) {
-      mobileMenu.classList.remove("open");
-    }
-  });
-
-}); // ← THIS WAS MISSING
+});
