@@ -28,7 +28,7 @@
   --accent: #1c3a6d;
 }
 
-/* Help browsers choose correct form controls / scrollbars */
+/* Tell browser how to theme scrollbars & forms */
 html {
   color-scheme: light;
 }
@@ -60,16 +60,9 @@ body {
   background: var(--card);
   position: sticky;
   top: 0;
-  z-index: 999;
+  z-index: 9999; /* ensures above hero */
   box-shadow: 0 2px 10px rgba(0,0,0,0.06);
 }
-
-.navbar {
-    position: sticky;
-    top: 0;
-    z-index: 9999; /* INCREASE this */
-}
-
 
 .navbar .logo a {
   text-decoration: none;
@@ -102,14 +95,16 @@ body {
   gap: 12px;
 }
 
-/* Hamburger */
+/* Hamburger (mobile only) */
 .hamburger {
   display: none;
   background: none;
   border: none;
-  font-size: 28px;
+  font-size: 32px;
   cursor: pointer;
   color: var(--text);
+  padding: 10px;
+  z-index: 20001; /* ensures TAP works above everything */
 }
 
 /* ---------------------------------------------------------
@@ -130,9 +125,8 @@ body {
   opacity: 0;
   transform: translateY(-10px);
   transition: opacity .25s ease, transform .25s ease;
-  z-index: 20000; /* <- ADD THIS */
+  z-index: 20000; /* CRITICAL — must float above hero */
 }
-
 
 .mobile-menu.open {
   display: flex;
@@ -178,6 +172,8 @@ body {
   background: linear-gradient(135deg, #0c1f42, #153a6d);
   color: #fff;
   animation: fadeInUp .7s ease forwards;
+  position: relative;
+  z-index: 1; /* BELOW navbar, ABOVE background */
 }
 
 .hero img {
@@ -186,11 +182,6 @@ body {
   border-radius: 70%;
   border: 4px solid rgba(255,255,255,0.18);
   margin-bottom: 20px;
-}
-
-.hero {
-    position: relative;
-    z-index: 1;
 }
 
 /* ---------------------------------------------------------
@@ -271,21 +262,3 @@ footer {
   font-size: 12px;
   padding: 0 4px;
 }
-
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 32px;
-  cursor: pointer;
-  color: var(--text);
-  padding: 8px;
-  z-index: 1000;
-}
-
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-}
-
