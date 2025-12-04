@@ -257,3 +257,21 @@ footer {
   font-size: 12px;
   padding: 0 4px;
 }
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 32px;
+  cursor: pointer;
+  color: var(--text);
+  padding: 8px;
+  z-index: 1000;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+}
+

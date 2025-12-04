@@ -47,9 +47,12 @@ document.addEventListener("DOMContentLoaded", () => {
     mobileMenu.classList.toggle("open");
   });
 
-  document.addEventListener("click", () => {
-    mobileMenu?.classList.remove("open");
-  });
+document.addEventListener("click", (e) => {
+  if (!mobileMenu.contains(e.target) && !burger.contains(e.target)) {
+    mobileMenu.classList.remove("open");
+  }
+});
+
 
   window.addEventListener("resize", () => {
     if (window.innerWidth > 768) {
