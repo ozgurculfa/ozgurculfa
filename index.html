@@ -1,241 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<title>Ozgur Culfa — Home</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>
+(function() {
+  const saved = localStorage.getItem("theme");
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-<style>
-:root{
-  --accent:#153a6d;
-  --card:#ffffff;
-  --bg:#f7f8fa;
-  --text:#222;
-}
-
-.dark-mode {
-  --bg: #0b0c0f;
-  --text: #e7eef8;
-  --card: #0f1114;
-  --accent: #1c3a6d;
-}
-
-body{
-  font-family:Inter, sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  margin:0;
-  transition: background-color .3s, color .3s;
-}
-
-/* NAVBAR (keeps centered links visual) */
-.navbar-wrapper{
-  position: sticky;
-  top:0;
-  z-index:999;
-  background:var(--card);
-  box-shadow:0 2px 10px rgba(0,0,0,0.06);
-}
-
-/* this inner container centers the nav links like before */
-.sticky-nav{
-  display:flex;
-  align-items:center;
-  justify-content:center; /* keeps links centered */
-  gap:14px;
-  padding:12px 0;
-  position:relative;
-}
-
-/* normal nav links (visible on desktop) */
-.nav-links {
-  display:flex;
-  gap:14px;
-  align-items:center;
-}
-.nav-links a {
-  color:var(--text);
-  text-decoration:none;
-  font-weight:600;
-  padding:4px 8px;
-  transition: color .3s, border-bottom .3s;
-}
-.nav-links a:hover{ color:var(--accent); }
-.nav-links a.active{ border-bottom:3px solid var(--accent); }
-
-/* Menu button (dropdown trigger) - positioned to the right inside nav wrapper */
-.menu-button {
-  position:absolute;
-  right:18px;
-  top:50%;
-  transform:translateY(-50%);
-  background:transparent;
-  border:none;
-  font-weight:600;
-  cursor:pointer;
-  color:var(--text);
-  padding:6px 10px;
-  border-radius:8px;
-}
-.menu-button:hover{ color:var(--accent); }
-
-/* Dropdown panel */
-.dropdown-panel {
-  display:none;
-  position:absolute;
-  right:18px;
-  top:100%;
-  margin-top:8px;
-  background:var(--card);
-  border-radius:10px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.12);
-  padding:8px 12px;
-  min-width:200px;
-  z-index:1000;
-}
-.dropdown-panel a{
-  display:block;
-  padding:8px 10px;
-  color:var(--text);
-  text-decoration:none;
-  font-weight:600;
-}
-.dropdown-panel a:hover{ background:rgba(0,0,0,0.04); color:var(--accent); border-radius:6px; }
-
-/* show class toggles visibility */
-.dropdown-panel.open{ display:block; }
-
-/* MOBILE: hide the centered links and move Menu to left */
-@media (max-width:768px){
-  .nav-links{ display:none; }
-  .menu-button{
-    right:unset;
-    left:12px;
+  if (saved === "dark") {
+    document.documentElement.classList.add("dark-mode");
+  } else if (saved === "light") {
+    document.documentElement.classList.remove("dark-mode");
+  } else {
+    // Follow system theme when no saved preference
+    const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.classList.toggle("dark-mode", systemDark);
   }
-  .dropdown-panel{
-    left:12px;
-    right:12px;
-    min-width:unset;
-  }
-}
+})();
+</script>
 
-/* HERO */
-.hero{
-  padding:120px 20px;
-  text-align:center;
-  background:linear-gradient(135deg,#0c1f42,#153a6d);
-  color:#fff;
-}
-.hero img{
-  max-width:40%;
-  min-width:180px;
-  border-radius:70%;
-  border:4px solid rgba(255,255,255,0.18);
-  margin-bottom:20px;
-}
-.hero h1{
-  font-weight:600;
-  font-size:clamp(1.8rem,4vw,2.8rem);
-  margin-bottom:10px;
-}
-.hero p.lead{
-  font-size:clamp(1rem,2.5vw,1.2rem);
-  margin-bottom:5px;
-}
+  <meta charset="utf-8">
+  <title>Ozgur Culfa — Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-/* MAIN / CARDS */
-main{
-  padding:60px 20px;
-}
-.card-custom{
-  border-radius:16px;
-  padding:28px 25px;
-  background:var(--card);
-  box-shadow:0 8px 20px rgba(0,0,0,0.08);
-  margin:25px 0;
-}
-
-/* FOOTER */
-footer{
-  padding:20px;
-  text-align:center;
-  background:var(--accent);
-  color:#fff;
-  font-weight:500;
-}
-
-/* DARK MODE */
-.dark-mode body, .dark-mode{
-  background:var(--bg);
-  color:var(--text);
-}
-.dark-mode .card-custom{
-  background:var(--card);
-  box-shadow:0 8px 20px rgba(0,0,0,0.2);
-}
-
-/* small fade */
-.fade-in{ opacity:0; transform:translateY(12px); animation:fadeInUp .5s forwards; }
-@keyframes fadeInUp{ to{ opacity:1; transform:none; } }
-</style>
+  <!-- Fonts + Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="common.css">
 </head>
+
 <body>
 
-<!-- NAVBAR WRAPPER -->
-<div class="navbar-wrapper">
-  <div class="sticky-nav">
+<!-- ==========================================================
+     NAVBAR
+========================================================== -->
+<nav class="navbar">
+  <div class="logo">
+    <a href="index.html">Ozgur Culfa</a>
+  </div>
 
-    <!-- Centered links (desktop) - identical look to your original centered nav -->
-    <nav class="nav-links" aria-label="Primary">
-      <a class="nav-link active" href="index.html">Home</a>
-      <a class="nav-link" href="about.html">About</a>
-      <a class="nav-link" href="experience.html">Experience</a>
-      <a class="nav-link" href="skills.html">Skills</a>
-      <a class="nav-link" href="publications.html">Publications</a>
-      <a class="nav-link" href="projects.html">Projects</a>
-      <a class="nav-link" href="contact.html">Contact</a>
-    </nav>
+  <!-- Desktop Menu -->
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
 
-    <!-- Menu button (always visible) - toggles the dropdown panel -->
-    <button class="menu-button" id="menuBtn" aria-expanded="false" aria-controls="dropdownPanel" onclick="toggleDropdown()">
-      Menu ▾
+  <!-- Right side (theme + mobile) -->
+  <div class="nav-right">
+    <button id="dark-toggle" class="theme-switch">
+      <span class="thumb"></span>
+      <span class="icons">
+        <span class="sun">☀️</span>
+        <span class="moon">🌙</span>
+      </span>
     </button>
 
-    <!-- Dropdown panel (hidden by default) -->
-    <div id="dropdownPanel" class="dropdown-panel" role="menu" aria-hidden="true">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="experience.html">Experience</a>
-      <a href="skills.html">Skills</a>
-      <a href="publications.html">Publications</a>
-      <a href="projects.html">Projects</a>
-      <a href="contact.html">Contact</a>
-      <hr style="border:none;border-top:1px solid rgba(0,0,0,0.06);margin:8px 0;">
-      <button class="dark-toggle" onclick="toggleDarkMode()" style="width:100%;">Dark Mode</button>
-    </div>
-
+    <button id="menuToggle" class="hamburger">☰</button>
   </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="experience.html">Experience</a>
+  <a href="skills.html">Skills</a>
+  <a href="projects.html">Projects</a>
+  <a href="publications.html">Publications</a>
+  <a href="contact.html">Contact</a>
 </div>
 
+
+<!-- ==========================================================
+     HERO — WITH SVG BLOB ANIMATION
+========================================================== -->
 <header class="hero fade-in">
-  <!-- <img src="img/profile.jpg" alt="Ozgur Culfa" /> -->
-  <div class="hero-img-placeholder"></div>
+
+  <!-- Existing hero content (kept the same) -->
+  <img src="img/profile.jpg" alt="Ozgur Culfa">
   <h1>Dr. Ozgur Culfa</h1>
   <p class="lead">Experimental Plasma Physicist • Laser–Plasma Interactions • ICF & HED Physics</p>
   <p>Center for Energy Research, University of California San Diego</p>
-  <div style="margin-top:20px">
-    <a class="btn btn-light" href="about.html">View CV & Research</a>
-    <a class="btn btn-outline-light" href="contact.html" style="margin-left:10px">Contact</a>
+
+  <div style="margin-top:20px;">
+    <a class="btn-accent" href="about.html">View CV & Research</a>
+    <a class="btn btn-outline-light" href="contact.html" style="margin-left:10px;">Contact</a>
   </div>
 </header>
 
+
+<!-- ==========================================================
+     MAIN CONTENT
+========================================================== -->
 <main class="container">
+
   <div class="card-custom fade-in">
     <h2>Quick Overview</h2>
-    <p>Experimental plasma physicist with 10+ years of experience in high-power laser experiments (LLNL, LBNL, ELI-NP, UNL, UCSD), particle acceleration, and diagnostics. Combines hands-on experimental leadership with large-scale PIC & Monte Carlo simulations.</p>
+    <p>
+      Experimental plasma physicist with 10+ years of experience in high-power laser facilities 
+      (LLNL, LBNL, ELI-NP, UNL, UCSD), particle acceleration, and x-ray/optical diagnostics. 
+      Combines experimental leadership with advanced PIC & Monte Carlo simulation expertise.
+    </p>
   </div>
 
   <div class="row">
@@ -243,7 +110,7 @@ footer{
       <div class="card-custom">
         <h3>Research Highlights</h3>
         <ul>
-          <li>Proton acceleration with near-critical density targets (foam/liquid targets)</li>
+          <li>Proton acceleration with near-critical density foam/liquid targets</li>
           <li>Betatron & bremsstrahlung x-ray source development</li>
           <li>Diagnostic design: interferometry, spectrometry, Ross-pair filters</li>
         </ul>
@@ -261,54 +128,16 @@ footer{
       </div>
     </div>
   </div>
+
 </main>
 
+<!-- ==========================================================
+     FOOTER
+========================================================== -->
 <footer>
   © 2025 Dr. Ozgur Culfa — Center for Energy Research, UCSD
 </footer>
 
-<script>
-/* Toggle dropdown panel (Menu ▾) */
-function toggleDropdown(){
-  const panel = document.getElementById('dropdownPanel');
-  const btn = document.getElementById('menuBtn');
-  const open = panel.classList.toggle('open');
-  panel.setAttribute('aria-hidden', !open);
-  btn.setAttribute('aria-expanded', open);
-}
-
-/* Close dropdown when clicking outside */
-document.addEventListener('click', function(e){
-  const panel = document.getElementById('dropdownPanel');
-  const btn = document.getElementById('menuBtn');
-  if (!panel.contains(e.target) && !btn.contains(e.target)) {
-    panel.classList.remove('open');
-    panel.setAttribute('aria-hidden', 'true');
-    btn.setAttribute('aria-expanded', 'false');
-  }
-});
-
-/* Dark mode toggling (uses class on <html> for global variables) */
-function toggleDarkMode(){
-  const html = document.documentElement;
-  html.classList.toggle('dark-mode');
-  // persist preference
-  if (html.classList.contains('dark-mode')) localStorage.setItem('site-dark','1');
-  else localStorage.removeItem('site-dark');
-}
-
-/* restore preference on load */
-document.addEventListener('DOMContentLoaded', function(){
-  if (localStorage.getItem('site-dark') === '1') {
-    document.documentElement.classList.add('dark-mode');
-  }
-
-  // small fade-in sequencing
-  document.querySelectorAll('.fade-in').forEach((el, i) => {
-    el.style.animationDelay = (i * 0.08) + 's';
-  });
-});
-</script>
-
+<script src="common.js"></script>
 </body>
 </html>

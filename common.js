@@ -1,41 +1,60 @@
-// Sayfa yüklenmeden önce dark mode'u uygula
-if(localStorage.getItem("darkMode") === "true"){
-  document.documentElement.classList.add("dark-mode");
-}
+document.addEventListener("DOMContentLoaded", () => {
 
-function toggleDarkMode() {
-  const html = document.documentElement;
-  html.classList.toggle('dark-mode');
-  localStorage.setItem('darkMode', html.classList.contains('dark-mode'));
-  updateToggleButton();
-}
+  const root = document.documentElement;
+  const toggleBtn = document.getElementById("dark-toggle");
 
-function updateToggleButton() {
-  const btn = document.querySelector('.dark-toggle');
-  if(!btn) return;
-  if(document.documentElement.classList.contains('dark-mode')){
-    btn.textContent = 'Light Mode';
-    btn.style.backgroundColor = '#1c3a6d';
+  /* ---------------------------------------------
+     Load saved theme OR fall back to system theme
+  --------------------------------------------- */
+  const saved = localStorage.getItem("theme");
+
+  if (saved === "dark") {
+    root.classList.add("dark-mode");
+  } else if (saved === "light") {
+    root.classList.remove("dark-mode");
   } else {
-    btn.textContent = 'Dark Mode';
-    btn.style.backgroundColor = '#153a6d';
+    // No manual preference → follow OS
+    const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    root.classList.toggle("dark-mode", systemDark);
   }
-}
 
-document.addEventListener('DOMContentLoaded', () => {
-  updateToggleButton();
-
-  // Nav link active class
-  const path = window.location.pathname.split("/").pop();
-  document.querySelectorAll('.nav-link').forEach(link => {
-    if(link.getAttribute('href') === path ||
-      (path === '' && link.getAttribute('href') === 'index.html')){
-      link.classList.add('active');
+  /* ---------------------------------------------
+     Respond to OS dark mode changes
+     (only if user hasn't manually selected a mode)
+  --------------------------------------------- */
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+    if (!localStorage.getItem("theme")) {
+      root.classList.toggle("dark-mode", e.matches);
     }
   });
 
-  // fade-in animations
-  document.querySelectorAll('.fade-in').forEach((el, i) => {
-    el.style.animationDelay = `${i*0.1}s`;
+  /* ---------------------------------------------
+     Manual Theme Toggle
+  --------------------------------------------- */
+  toggleBtn?.addEventListener("click", () => {
+    const dark = root.classList.toggle("dark-mode");
+    localStorage.setItem("theme", dark ? "dark" : "light");
   });
+
+  /* ---------------------------------------------------------
+     MOBILE MENU
+  --------------------------------------------------------- */
+  const burger = document.getElementById("menuToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  burger?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    mobileMenu.classList.toggle("open");
+  });
+
+  document.addEventListener("click", () => {
+    mobileMenu?.classList.remove("open");
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+      mobileMenu?.classList.remove("open");
+    }
+  });
+
 });

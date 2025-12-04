@@ -1,165 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<title>Ozgur Culfa — Contact</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>
+(function() {
+  const saved = localStorage.getItem("theme");
 
-<!-- Fonts & Libraries -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  if (saved === "dark") {
+    document.documentElement.classList.add("dark-mode");
+  } else if (saved === "light") {
+    document.documentElement.classList.remove("dark-mode");
+  } else {
+    // Follow system theme when no saved preference
+    const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.classList.toggle("dark-mode", systemDark);
+  }
+})();
+</script>
 
-<style>
-/* ─────────────────────────────────────────────
-   THEME VARIABLES (IDENTICAL TO MAIN PAGE)
-────────────────────────────────────────────── */
-:root {
-  --accent: #153a6d;
+  <meta charset="utf-8">
+  <title>Ozgur Culfa — Contact</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  /* LIGHT MODE */
-  --bg: #f7f8fa;
-  --text: #222;
-  --card: #ffffff;
-  --toggle-bg: #153a6d;
-}
+  <!-- Fonts & Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="common.css" />
 
-/* DARK MODE OVERRIDES */
-.dark-mode {
-  --bg: #0b0c0f;
-  --text: #e7eef8;
-  --card: #0f1114;
-  --toggle-bg: #1c3a6d;
-}
-
-/* ─────────────────────────────────────────────
-   GLOBAL
-────────────────────────────────────────────── */
-body {
-  font-family: Inter, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  margin: 0;
-}
-
-/* ─────────────────────────────────────────────
-   NAVIGATION
-────────────────────────────────────────────── */
-.sticky-nav {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  background: var(--card);
-  padding: 12px 0;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-}
-
-.nav-link {
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.nav-link.active {
-  border-bottom: 2px solid var(--accent);
-}
-
-/* ─────────────────────────────────────────────
-   CARDS
-────────────────────────────────────────────── */
-.card-custom {
-  border-radius: 14px;
-  padding: 25px;
-  background: var(--card);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-  margin: 20px 0;
-  color: var(--text);
-}
-
-.card-custom a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-/* DARK MODE card link color */
-.dark-mode .card-custom a {
-  color: var(--toggle-bg);
-}
-
-/* ─────────────────────────────────────────────
-   FOOTER
-────────────────────────────────────────────── */
-footer {
-  padding: 18px;
-  text-align: center;
-  background: #0c1f42;
-  color: #fff;
-}
-
-.dark-mode footer {
-  background: #000;
-}
-
-/* ─────────────────────────────────────────────
-   DARK MODE TOGGLE
-────────────────────────────────────────────── */
-.dark-toggle {
-  cursor: pointer;
-  border-radius: 20px;
-  padding: 6px 12px;
-  border: none;
-  background: var(--toggle-bg);
-  color: #fff;
-}
-
-/* Fade-in */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s forwards;
-}
-
-@keyframes fadeInUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-</style>
+  <!-- Optional Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
 </head>
 
 <body>
 
-<!-- NAVIGATION -->
-<nav class="sticky-nav">
-  <a class="nav-link" href="index.html">Home</a>
-  <a class="nav-link" href="about.html">About</a>
-  <a class="nav-link" href="experience.html">Experience</a>
-  <a class="nav-link" href="skills.html">Skills</a>
-  <a class="nav-link" href="publications.html">Publications</a>
-  <a class="nav-link" href="projects.html">Projects</a>
-  <a class="nav-link" href="contact.html">Contact</a>
-  <button class="dark-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+<!-- ==========================================================
+     NAVBAR (Modern + Unified)
+========================================================== -->
+<nav class="navbar">
+  <div class="logo">
+    <a href="index.html">Ozgur Culfa</a>
+  </div>
+
+  <!-- Desktop Menu -->
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="publications.html">Publications</a></li>
+    <li><a class="active" href="contact.html">Contact</a></li>
+  </ul>
+
+  <!-- Right side -->
+  <div class="nav-right">
+
+    <!-- Theme Switch -->
+    <button id="dark-toggle" class="theme-switch">
+      <span class="thumb"></span>
+      <span class="icons">
+        <span class="sun">☀️</span>
+        <span class="moon">🌙</span>
+      </span>
+    </button>
+
+    <!-- Mobile Menu Button -->
+    <button id="menuToggle" class="hamburger">☰</button>
+
+  </div>
 </nav>
 
-<!-- CONTENT -->
-<main class="container" style="padding:40px 20px">
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="experience.html">Experience</a>
+  <a href="skills.html">Skills</a>
+  <a href="projects.html">Projects</a>
+  <a href="publications.html">Publications</a>
+  <a href="contact.html" class="active">Contact</a>
+</div>
+
+
+<!-- ==========================================================
+     MAIN CONTENT
+========================================================== -->
+<main class="container" style="padding: 40px 20px;">
   <div class="card-custom fade-in">
     <h1>Contact</h1>
-    <p><strong>Email:</strong> <a href="mailto:ozgurculfa@gmail.com">ozgurculfa@gmail.com</a></p>
+
+    <p><strong>Email:</strong> 
+      <a href="mailto:ozgurculfa@gmail.com">ozgurculfa@gmail.com</a>
+    </p>
+
     <p><strong>Phone:</strong> +1 531 495 89 75</p>
-    <p><strong>Affiliation:</strong> Center for Energy Research, UC San Diego</p>
-    <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/ozgurculfa" target="_blank">linkedin.com/in/ozgurculfa</a></p>
+
+    <p><strong>Affiliation:</strong> 
+      Center for Energy Research, UC San Diego
+    </p>
+
+    <p><strong>LinkedIn:</strong> 
+      <a href="https://linkedin.com/in/ozgurculfa" target="_blank">
+        linkedin.com/in/ozgurculfa
+      </a>
+    </p>
+
   </div>
 </main>
 
-<!-- FOOTER -->
+
+<!-- ==========================================================
+     FOOTER
+========================================================== -->
 <footer>
   © 2025 Dr. Ozgur Culfa
 </footer>
 
-<!-- UNIVERSAL SCRIPT -->
-<script src="script.js"></script>
+<script src="common.js"></script>
 </body>
 </html>
