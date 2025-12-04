@@ -194,9 +194,17 @@ body {
   z-index: 1; /* BELOW NAV, ABOVE BACKGROUND */
 }
 
+/* 
+FIX MOBILE LAYOUT BREAKING HERO IMAGE.hero img {
+  width: 90%;
+  max-width: 320px; prevents breaking mobile layout  border-radius: 70%;
+  border: 4px solid rgba(255,255,255,0.18);
+  margin: 0 auto 20px auto;
+}
+ */
 
 .hero img {
-  width: 70%;
+  width: 90%;
   max-width: 320px;
   aspect-ratio: 1 / 1;
   object-fit: cover;
@@ -211,8 +219,280 @@ body {
   image-rendering: -webkit-optimize-contrast;
 }
 
+/* ---------------------------------------------------------
+   HIGH-ENERGY PLASMA ANIMATION BACKGROUND
+--------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  padding: 160px 20px;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+.plasma-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background: radial-gradient(circle at 30% 30%, rgba(0, 140, 255, 0.45), transparent 60%),
+              radial-gradient(circle at 70% 60%, rgba(255, 80, 0, 0.45), transparent 55%),
+              radial-gradient(circle at 50% 80%, rgba(255, 0, 255, 0.35), transparent 60%),
+              #000;
+
+  filter: blur(80px) brightness(1.4);
+  animation: plasmaFlow 18s ease-in-out infinite alternate;
+}
 
 
+/* ---------------------------------------------------------
+   LASER ORANGE BUTTON — High-Energy Accent
+--------------------------------------------------------- */
+
+.btn-laser {
+  background: linear-gradient(135deg, #ff6a00, #ff3c00);
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: transform .2s ease, box-shadow .25s ease, opacity .25s;
+}
+
+/* Hover effect: glowing laser pulse */
+.btn-laser:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(255, 72, 0, 0.55);
+  opacity: 0.95;
+}
+
+/* ---------------------------------------------------------
+   LASER SHINE EFFECT
+--------------------------------------------------------- */
+
+.btn-laser {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-laser::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0.0) 0%,
+    rgba(255,255,255,0.35) 50%,
+    rgba(255,255,255,0.0) 100%
+  );
+  transform: skewX(-20deg);
+  animation: laserShine 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes laserShine {
+  0%   { left: -120%; }
+  50%  { left: 130%; }
+  100% { left: 130%; }
+}
+
+.btn-laser-contact {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: transform .2s ease, box-shadow .25s ease;
+}
+
+/* Shine animation (same as btn-laser, but adjusted for outline) */
+
+/* Plasma movement */
+@keyframes plasmaFlow {
+  0% {
+    transform: scale(1.1) translate(-20px, -10px) rotate(0deg);
+    filter: blur(80px) brightness(1.3);
+  }
+  50% {
+    transform: scale(1.25) translate(40px, 20px) rotate(20deg);
+    filter: blur(100px) brightness(1.6);
+  }
+  100% {
+    transform: scale(1.1) translate(-25px, 0px) rotate(-10deg);
+    filter: blur(90px) brightness(1.4);
+  }
+}
+
+.btn-laser-contact::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -130%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0.0) 0%,
+    rgba(255,255,255,0.35) 50%,
+    rgba(255,255,255,0.0) 100%
+  );
+  transform: skewX(-20deg);
+  animation: laserShineContact 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes laserShineContact {
+  0%   { left: -130%; }
+  50%  { left: 130%; }
+  100% { left: 130%; }
+}
+
+
+
+/* Plasma Glow */
+.btn-laser-contact:hover {
+  transform: translateY(-3px);
+  box-shadow:
+      0 0 14px rgba(255, 80, 0, 0.55),
+      0 0 28px rgba(255, 120, 0, 0.35),
+      0 0 50px rgba(255, 150, 0, 0.25);
+}
+
+/* We also add plasma glow to the main laser button to match */
+.btn-laser:hover {
+  box-shadow:
+      0 0 14px rgba(255, 80, 0, 0.55),
+      0 0 28px rgba(255, 120, 0, 0.35),
+      0 0 50px rgba(255, 150, 0, 0.25);
+}
+
+/* Fusion Green Plasma Glow (Contact Button) */
+.btn-laser-contact:hover {
+  transform: translateY(-3px);
+  box-shadow:
+      0 0 14px rgba(0, 255, 150, 0.55),
+      0 0 28px rgba(0, 255, 140, 0.35),
+      0 0 50px rgba(0, 255, 120, 0.25);
+}
+
+
+
+/* ---------------------------------------------------------
+   CONTACT BUTTON — Laser Shine + Fusion Green Plasma Glow
+--------------------------------------------------------- */
+
+.btn-laser-contact {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 8px;
+  border: 2px solid #fff;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  transition: transform .2s ease, box-shadow .25s ease;
+}
+
+/* Laser Shine Animation */
+.btn-laser-contact::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -130%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0.0) 0%,
+    rgba(255,255,255,0.35) 50%,
+    rgba(255,255,255,0.0) 100%
+  );
+  transform: skewX(-20deg);
+  animation: laserShineContact 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes laserShineContact {
+  0%   { left: -130%; }
+  50%  { left: 130%; }
+  100% { left: 130%; }
+}
+
+/* Fusion Green Glow (Option B) */
+.btn-laser-contact:hover {
+  transform: translateY(-3px);
+  box-shadow:
+      0 0 14px rgba(0, 255, 150, 0.55),
+      0 0 28px rgba(0, 255, 140, 0.35),
+      0 0 50px rgba(0, 255, 120, 0.25);
+}
+
+/* Optional: slight idle glow (looks nice on plasma themes) */
+.btn-laser-contact {
+  box-shadow:
+      0 0 6px rgba(0, 255, 150, 0.25);
+}
+
+
+/* Text should float above animation */
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Subtle dark overlay for readability */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.32);
+  z-index: 1;
+}
+
+.hero-buttons {
+  margin-top: 20px;
+}
+
+.btn-outline-light {
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background .3s;
+}
+
+.btn-outline-light:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #007BFF, #00C6FF);
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform .2s, box-shadow .2s;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 150, 255, 0.4);
+}
 
 
 
