@@ -1,8 +1,28 @@
 /* ---------------------------------------------------------
+   GLOBAL RESET / FIXES FOR MOBILE
+--------------------------------------------------------- */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---------------------------------------------------------
    THEME VARIABLES
 --------------------------------------------------------- */
 
-/* Default: Light Mode */
 :root {
   --accent: #153a6d;
   --card: #ffffff;
@@ -10,7 +30,7 @@
   --text: #222;
 }
 
-/* Auto Dark Mode (follows system) */
+/* Auto Dark Mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #0b0c0f;
@@ -20,7 +40,7 @@
   }
 }
 
-/* Manual Override: User-selected Dark Mode */
+/* User-selected Dark Mode */
 .dark-mode {
   --bg: #0b0c0f;
   --text: #e7eef8;
@@ -28,7 +48,6 @@
   --accent: #1c3a6d;
 }
 
-/* Tell browser how to theme scrollbars & forms */
 html {
   color-scheme: light;
 }
@@ -44,7 +63,6 @@ body {
   font-family: Inter, sans-serif;
   background: var(--bg);
   color: var(--text);
-  margin: 0;
   transition: background-color .3s, color .3s;
 }
 
@@ -60,7 +78,7 @@ body {
   background: var(--card);
   position: sticky;
   top: 0;
-  z-index: 9999; /* ensures above hero */
+  z-index: 9999; /* ABOVE HERO AND MENU */
   box-shadow: 0 2px 10px rgba(0,0,0,0.06);
 }
 
@@ -104,7 +122,7 @@ body {
   cursor: pointer;
   color: var(--text);
   padding: 10px;
-  z-index: 20001; /* ensures TAP works above everything */
+  z-index: 20001; /* ENSURES TOUCH WORKS */
 }
 
 /* ---------------------------------------------------------
@@ -125,7 +143,7 @@ body {
   opacity: 0;
   transform: translateY(-10px);
   transition: opacity .25s ease, transform .25s ease;
-  z-index: 20000; /* CRITICAL — must float above hero */
+  z-index: 20000; /* ABOVE HERO */
 }
 
 .mobile-menu.open {
@@ -150,7 +168,7 @@ body {
 }
 
 /* ---------------------------------------------------------
-   RESPONSIVE
+   RESPONSIVE BEHAVIOR
 --------------------------------------------------------- */
 
 @media (max-width: 768px) {
@@ -173,15 +191,16 @@ body {
   color: #fff;
   animation: fadeInUp .7s ease forwards;
   position: relative;
-  z-index: 1; /* BELOW navbar, ABOVE background */
+  z-index: 1; /* BELOW NAV, ABOVE BACKGROUND */
 }
 
+/* FIX MOBILE LAYOUT BREAKING HERO IMAGE */
 .hero img {
-  max-width: 500px;
-  height: auto;
+  width: 90%;
+  max-width: 320px; /* prevents breaking mobile layout */
   border-radius: 70%;
   border: 4px solid rgba(255,255,255,0.18);
-  margin-bottom: 20px;
+  margin: 0 auto 20px auto;
 }
 
 /* ---------------------------------------------------------
