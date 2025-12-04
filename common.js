@@ -39,25 +39,34 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---------------------------------------------------------
      MOBILE MENU
   --------------------------------------------------------- */
-  const burger = document.getElementById("menuToggle");
-  const mobileMenu = document.getElementById("mobileMenu");
+/* ---------------------------------------------------------
+   MOBILE MENU — iPhone Safe Version
+--------------------------------------------------------- */
+const burger = document.getElementById("menuToggle");
+const mobileMenu = document.getElementById("mobileMenu");
 
-  burger?.addEventListener("click", (e) => {
-    e.stopPropagation();
-    mobileMenu.classList.toggle("open");
-  });
+/* Open menu (supports Safari's touch issues) */
+function toggleMenu(e) {
+  e.stopImmediatePropagation();   // Safari: fully stop bubbling
+  mobileMenu.classList.toggle("open");
+}
 
-document.addEventListener("click", (e) => {
+burger?.addEventListener("click", toggleMenu);
+burger?.addEventListener("touchstart", toggleMenu);
+
+/* Close menu when tapping outside */
+function closeMenu(e) {
   if (!mobileMenu.contains(e.target) && !burger.contains(e.target)) {
     mobileMenu.classList.remove("open");
   }
-});
+}
 
+document.addEventListener("click", closeMenu);
+document.addEventListener("touchstart", closeMenu);
 
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 768) {
-      mobileMenu?.classList.remove("open");
-    }
-  });
-
+/* Close menu when resizing to desktop */
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 768) {
+    mobileMenu.classList.remove("open");
+  }
 });
